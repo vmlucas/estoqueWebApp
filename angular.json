@@ -5,6 +5,9 @@
   "projects": {
     "estoqueWeb": {
       "projectType": "application",
+      "i18n": {
+         "sourceLocale": "pt-BR"
+      },
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
@@ -22,12 +25,18 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/public/dist/css",
+              "src/public/dist/js",
+              "src/public/img"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css","node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/jquery/dist/jquery.slim.min.js",
+               "node_modules/popper.js/dist/umd/popper.min.js",
+               "node_modules/bootstrap/dist/js/bootstrap.min.js"]
           },
           "configurations": {
             "production": {
@@ -60,7 +69,8 @@
               "buildTarget": "estoqueWeb:build:production"
             },
             "development": {
-              "buildTarget": "estoqueWeb:build:development"
+              "buildTarget": "estoqueWeb:build:development",
+              "proxyConfig": "src/proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"
@@ -91,5 +101,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

@@ -1,0 +1,40 @@
+<div class="col-md-6">
+  <h4>Dados Consolidados</h4>
+  <hr>
+  @if ( consolidadoAtual ){
+  <label style="font-size: small;font-weight: bold;">
+    Data Atual do Estoque: {{ consolidadoAtual.data.split('T')[0] }}<td> Valor: {{consolidadoAtual.valorTotal | currency: 'BRL' }}</td></label>
+  }
+  <hr>
+  <label style="font-size: medium;font-weight: bold;">Total do Estoque por data de cadastro:</label>
+  <select name="statusControl" (change)="onChange($event)" style="font-size: small;">
+    <option disabled>Please Select</option>
+    <option *ngFor="let ano of anos" [value]="ano">{{ano}}</option>
+  </select>
+  <table class="table table-striped table-sm">
+    <thead>
+        <tr style="border-bottom: 1px solid var(--silver);font-size: small;">
+        <th>Data de Entrada no Estoque</th>
+        <th>Valor Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (consolidado of consolidados;track consolidado.data; let i = $index) {
+        <tr style="border-bottom: 1px solid var(--silver);font-size: small;">
+          <td>{{ consolidado.data.split('T')[0] }}</td>
+          <td>{{ consolidado.valorTotal | currency: 'BRL' }}</td>
+        </tr>
+    
+      }
+    </tbody>
+  </table>        
+  </div>
+  <div>
+    <canvas #chart baseChart 
+              [data]="dChartData"
+              [type]="dChartType"
+              (chartClick)="chartClicked($event)">
+  </canvas>
+  </div>
+  
+

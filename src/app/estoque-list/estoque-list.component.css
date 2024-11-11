@@ -1,0 +1,5 @@
+.container {
+    align-items: center; /* And this centers it vertically */
+    height: 100vh; /* This will make sure your container is as tall as the entire viewport */
+    width: 80%;
+  }

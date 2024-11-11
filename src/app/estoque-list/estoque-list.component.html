@@ -1,0 +1,68 @@
+<div class="container">
+    <h4>Dados dos Medicamentos / Insumos</h4>
+    <table>
+      <tr style="border-bottom: 1px solid var(--silver);font-size: medium;">
+        <td><label style="font-size: small;">Tipos</label></td>
+        <td>
+          <select name="statusControl" (change)="onChange($event)" style="font-size: small;">
+              <option disabled>Please Select</option>
+              <option *ngFor="let tipo of tipos" [value]="tipo">{{tipo}}</option>
+          </select>
+        </td>
+        <td><label style="font-size: small;">Produtos</label></td>
+        <td>
+          <select name="statusControl" [(ngModel)]="name" style="font-size: small;">
+              <option disabled>Please Select</option>
+              <option *ngFor="let productName of productNames" [value]="productName">{{productName}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--silver);font-size: medium;">
+        <td><label style="font-size: small;">Início:</label></td>
+        <td><input type="date"
+        id="start" placeholder="Data Início"
+        required size="12"
+        [(ngModel)]="start"
+        name="start" style="font-size: small;" /></td>
+      <td><label style="font-size: small;">Fim:</label></td>
+      <td><input type="date"
+        id="end" placeholder="Data fim"
+        required size="12"
+        [(ngModel)]="end"
+        name="end"  style="font-size: small;"/>&nbsp;
+      <button (click)="buscarProdutos()" class="btn btn-success" style="font-size: small;">Buscar</button></td>
+      </tr>
+  </table>
+  <hr>
+  @if(isLoading){
+    <app-spinner></app-spinner>
+  } 
+  @if ( produtos.length > 0 ){
+  <table class="table table-striped table-sm">
+    <thead>
+        <tr style="border-bottom: 1px solid var(--silver);font-size: medium;">
+        <th>Nome</th>
+        <th>Data de Entrada no Estoque</th>
+        <th>Tipo</th>
+        <th>Valor</th>
+        <th>Qtd</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (produto of produtos; track produto.id; let i = $index) {
+        <tr style="border-bottom: 1px solid var(--silver);font-size: small;">
+          <td>{{ produto.nome }}</td>
+          <td>{{ produto.data | date: 'dd/MM/yyyy'}}</td>
+          <td>{{ produto.tipo }}</td>
+          <td>{{ produto.valor | currency: 'BRL'  }}</td>
+          <td>{{ produto.qtd }}</td>
+        </tr>
+    
+      }
+    </tbody>
+  </table>     
+   }
+     
+  </div>
+  
+
