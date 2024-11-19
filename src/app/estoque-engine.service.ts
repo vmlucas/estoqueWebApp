@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { finalize, Observable } from 'rxjs';
 import { Produto } from './produto.model';
 import { Consolidado } from './consolidado';
-
+import { MedicamentosCEAF } from './medicamentos-ceaf';
 
 @Injectable({
   providedIn: 'root'
@@ -44,4 +44,9 @@ export class EstoqueEngineService {
     return this.http.get<Consolidado[]>(`/consolidadoTipoValorAno?tipo=${tipo}`);
   }
 
+  //MedicamentosCEAF
+  findaMedicamentosCEAF(nome:string):Observable<Produto[]>{ 
+    
+    return this.http.get<Produto[]>(`/buscarMedicamentosCEAF?nome=${nome}`);
+  }
 }

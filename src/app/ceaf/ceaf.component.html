@@ -1,0 +1,72 @@
+<div class="container">
+    <h4>Dados dos Medicamentos CEAF</h4>
+    <table>
+      <tr style="border-bottom: 1px solid var(--silver);font-size: small;">
+        <td><label style="font-size: small;">Nome do Medicamento:</label></td>
+        <td><input type="text"
+        id="start" placeholder="Nome do Medicamento"
+        required size="50"
+        [(ngModel)]="name"
+        name="start" style="font-size: small;" /></td>&nbsp;
+      <td><button (click)="buscarProdutos()" class="btn btn-success" style="font-size: small;">Buscar</button></td>
+      </tr>
+  </table>
+  <hr>
+  @if(isLoading){
+    <app-spinner></app-spinner>
+  } 
+  @if ( produtos.length > 0 ){
+  <table class="table table-striped table-sm">
+    <thead>
+        <tr style="border-bottom: 1px solid var(--silver);font-size: medium;">
+        <th>Nome</th>
+        <th>Data da Entrada no Estoque</th>
+        <th>Tipo</th>
+        <th>Valor</th>
+        <th>Qtd</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (produto of produtos; track produto.id; let i = $index) {
+        <tr style="border-bottom: 1px solid var(--silver);font-size: small;">
+          <td>{{ produto.nome }}</td>
+          <td>{{ produto.data | date: 'dd/MM/yyyy'}}</td>
+          <td>{{ produto.tipo }}</td>
+          <td>{{ produto.valor | currency: 'BRL'  }}</td>
+          <td>{{ produto.qtd }}</td>
+        </tr>
+        <tr>
+            <td colspan="5">
+            @if ( produto.medicamentosCEAF ){
+                <table class="table table-striped table-sm">
+                  <thead>
+                      <tr style="border-bottom: 1px solid var(--silver);font-size: medium;">
+                      <th>Nome</th>
+                      <th>Data da Atualização da CID</th>
+                      <th>Descrição Cid</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (medicamentosCEAF of produto.medicamentosCEAF; track medicamentosCEAF.id; let i = $index) {
+                      <tr style="border-bottom: 1px solid var(--silver);font-size: small;">
+                        <td>{{ medicamentosCEAF.nome }}</td>
+                        <td>{{ medicamentosCEAF.data | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{ medicamentosCEAF.descricaoCid }}</td>
+                      </tr>
+                  
+                    }
+                  </tbody>
+                </table>     
+                 }
+            </td>     
+        </tr>
+    
+      }
+    </tbody>
+  </table>     
+   }
+     
+  </div>
+  
+
+

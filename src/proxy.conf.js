@@ -4,6 +4,7 @@ const PROXY_CONFIG=[
             '/buscarTipos',
             '/buscarNomeMedicamentos',
             '/buscarMedicamentosAnoMes',
+            '/buscarMedicamentosCEAF',
             '/consolidadoValor',
             '/consolidadoTipoValorAno'
         ],

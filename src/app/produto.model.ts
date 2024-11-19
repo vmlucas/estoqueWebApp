@@ -1,3 +1,5 @@
+import { MedicamentosCEAF } from "./medicamentos-ceaf";
+
 export class Produto {
     id?: string;
     data? : Date;
@@ -6,4 +8,5 @@ export class Produto {
 	tipo?: string;
 	valor: number=0.0;
 	qtd: number=0;
+	medicamentosCEAF?:MedicamentosCEAF[]
 }
